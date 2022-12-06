@@ -40,7 +40,7 @@ def gameRender(root):
 
     label1.grid(column=0, row=0)
     label2.grid(column=0, row=1)
-    label3.grid(column=0, row=3)
+    label3.grid(column=0, row=2)
 
     return gameLabelFrame
 
@@ -53,8 +53,9 @@ def initializeTkinter():
     # set window title
     root.wm_title("Christopher Phillips - A Game of Bridge")
 
-    # set window size
-    root.geometry("350x400")
+    # set window size and disable rescaling
+    root.geometry("375x400")
+    root.resizable("false", "false")
 
     # Configure frames to display both settings and game
     rootFrame = tk.Frame(root)
