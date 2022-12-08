@@ -8,6 +8,7 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from random import randint
 from bridgeGenerator import bridgeGenerator
+from pawnGuess import pawnGuess
 
 
 def playingBoard(players, bridge):
@@ -23,7 +24,7 @@ def playingBoard(players, bridge):
         tileGuess = pawnGuess(bridge[currentSegment])
 
         # Test to see how the game is playing and making sure its working correctly
-        print("Remaining Players:", str(remainingPlayers), "bridge:", str(bridge))
+        # print("Remaining Players:", str(remainingPlayers) + ".", "bridge:", str(bridge))
 
         # If the guess is incorrect:
         # The remainingPlayers count decreases and currentSegment is not increased
@@ -45,19 +46,11 @@ def playingBoard(players, bridge):
 def playGame(players, segments, tiles, incorrect):
     # Generates a bridge for the game to be played on
     bridge = bridgeGenerator(segments, tiles, incorrect)
-    # bridge[0] = [2, 3]
 
     # Play the game
     results = playingBoard(players, bridge)
 
     return results
 
-
 # Example of how to use this code:
 # playGame(Number of players, number of segments, number of tiles per segment, number of incorrect tiles per segment)
-gameResults = []
-
-#for i in range(1000):
-#    gameResults[i] = playGame(20, 18, 2, 1)
-
-print(playGame(20, 18, 2, 1))

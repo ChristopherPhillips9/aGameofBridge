@@ -59,16 +59,13 @@ def pawnGuess(current):
     return currentWithoutInt
 
 
-# For testing purposes:
+# Examples of how to use this code:
 
-# print("returns 1:")
-# for j in range(10):
-#     print(pawnGuess(["X", 0]))
+# returns 1
+# pawnGuess(["X", 0])
 
-# print("returns 0:")
-# for j in range(10):
-#     print(pawnGuess([0, "X"]))
-#
-# print("returns 1, 3, or 4:")
-# for j in range(10):
-#     print(pawnGuess(["X", 0, "X", 1, 0, "X"]))
+# returns 0
+# pawnGuess([0, "X"])
+
+# returns 1, 3, or 4:
+# pawnGuess(["X", 0, "X", 1, 0, "X"])
