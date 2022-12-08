@@ -9,12 +9,6 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 from random import randint
 from bridgeGenerator import bridgeGenerator
 
-def pawnGuess(current):
-    # Grab the current segment from the game.
-    # Remove the instances of X that occur, make a guess based on the remaining values available
-
-    return currentSegment
-
 
 def playingBoard(players, bridge):
     # Define the number of players remaining
@@ -22,12 +16,11 @@ def playingBoard(players, bridge):
 
     # Iterates through all the segments of the bridge. currentSegment is incremented when a correct tile guess is made.
     currentSegment = 0
+
     while currentSegment in range(len(bridge)):
 
-        # Takes a random guess based on the number of tiles in the segment.
-        # If there are 2 segments, it will return 0 or 1
-        # TODO: make it guess more effectively and send to pawnGuess():
-        tileGuess = randint(0, (len(bridge[currentSegment]) - 1))
+        # Returns a single integer as the guess from pawnGuess
+        tileGuess = pawnGuess(bridge[currentSegment])
 
         # Test to see how the game is playing and making sure its working correctly
         print("Remaining Players:", str(remainingPlayers), "bridge:", str(bridge))
