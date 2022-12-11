@@ -22,7 +22,18 @@ def programLoop():
         print(" 3) Quit")
 
         print("Please select an option:")
-        selection = input("choose (1, 2, 3): ")
+        menuSelection = input("choose (1, 2, 3): ")
+
+        if menuSelection == str(1):
+            pass
+        elif menuSelection == str(2):
+            pass
+        elif menuSelection == str(3):
+            quit(0)
+        else:
+            print("")
+            print(menuSelection, "is not a valid option. Please type 1, 2, or 3.")
+            print("")
 
 
 programLoop()
