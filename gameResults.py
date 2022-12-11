@@ -3,24 +3,21 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from gamePlayer import playGame
 
-# the list with all the games in it
-gameResults = []
 
-# the sum of gameResults
-newGameResults = 0
+# This function will return the average number of players that reach the end by simulating a specified amount of times
+def averageSuccessRate(times, players, segments, tiles, safe):
+    # the array that stores the number of games
+    gameResults = []
+    # the sum of gameResults
+    newGameResults = 0
 
-# How many times to play the game
-timesToPlay = 10000
+    # save the results of all the games
+    for i in range(times):
+        gameResults.append(playGame(players, segments, tiles, safe))
 
-# save the results of all the games
-for i in range(timesToPlay):
-    gameResults.append(playGame(20, 18, 2, 1))
+    # calculate the sum of everything in the array
+    for i in range(times):
+        newGameResults = newGameResults + gameResults[i]
 
-# add all the sums together
-for i in range(timesToPlay):
-    newGameResults = newGameResults + gameResults[i]
-
-averageAmountOfWinners = newGameResults / timesToPlay
-
-print(averageAmountOfWinners)
-print(gameResults)
+    # return the average
+    return round(newGameResults / times)
