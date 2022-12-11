@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
-from gamePlayer import playGame
+from gameSimulator import playGame
 
 
 # This function will return the average number of players that reach the end by simulating a specified amount of times
