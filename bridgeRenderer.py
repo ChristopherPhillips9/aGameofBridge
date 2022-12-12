@@ -28,9 +28,10 @@ def bridgeGUI(bridge, players, odds):
     # formatting and header
     print("\n\n")
     print("Key: █ = unknown tile, X = incorrect guess, C = correct guess")
-    print("\nplayers remaining:", players)
-    print("\nChances of the current player surviving:", )
-    print("\nAverage survival amount for this bridge:", odds)
+    print("players remaining:", players)
+    print("Chances of the current player surviving:", )
+    print("Average survival amount for this bridge:", odds)
+    print("")
 
     # print the bridge
     for i in range(len(bridge)):
@@ -48,5 +49,5 @@ def bridgeGUI(bridge, players, odds):
         elif i < 100:
             print("segment " + str(i) + ": " + displayBridgeSegment)
 
-    print("\n Which tile will you move to next? choose a tile from 0 to "+ str(len(bridge[i])-1))
+    print("\nWhich tile will you move to next? choose a tile from 0 to "+ str(len(bridge[i])-1))
     return input("Input: ")
