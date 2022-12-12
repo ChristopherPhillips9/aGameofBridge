@@ -1,26 +1,17 @@
 #!/usr/bin/env python
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
-# from gamePlayer import gamePlayer
-# from gameSimulator import
+from gameResults import averageSuccessRate
 
 # Cool title image. Nothing else.
-print(
-    "\n....███........██████......███....██.....██.████████.....███████..████████....████████..████████..████.████████...██████...████████.")
-print(
-    "...██.██......██....██....██.██...███...███.██..........██.....██.██..........██.....██.██.....██..██..██.....██.██....██..██.......")
-print(
-    "..██...██.....██.........██...██..████.████.██..........██.....██.██..........██.....██.██.....██..██..██.....██.██........██.......")
-print(
-    ".██.....██....██...████.██.....██.██.███.██.██████......██.....██.██████......████████..████████...██..██.....██.██...████.██████...")
-print(
-    ".█████████....██....██..█████████.██.....██.██..........██.....██.██..........██.....██.██...██....██..██.....██.██....██..██.......")
-print(
-    ".██.....██....██....██..██.....██.██.....██.██..........██.....██.██..........██.....██.██....██...██..██.....██.██....██..██.......")
-print(
-    ".██.....██.....██████...██.....██.██.....██.████████.....███████..██..........████████..██.....██.████.████████...██████...████████.")
-print(
-    "............................................................................................................By Christopher Phillips.\n")
+print("\n....███........██████......███....██.....██.████████.....███████..████████....████████..████████..████.████████...██████...████████.")
+print("...██.██......██....██....██.██...███...███.██..........██.....██.██..........██.....██.██.....██..██..██.....██.██....██..██.......")
+print("..██...██.....██.........██...██..████.████.██..........██.....██.██..........██.....██.██.....██..██..██.....██.██........██.......")
+print(".██.....██....██...████.██.....██.██.███.██.██████......██.....██.██████......████████..████████...██..██.....██.██...████.██████...")
+print(".█████████....██....██..█████████.██.....██.██..........██.....██.██..........██.....██.██...██....██..██.....██.██....██..██.......")
+print(".██.....██....██....██..██.....██.██.....██.██..........██.....██.██..........██.....██.██....██...██..██.....██.██....██..██.......")
+print(".██.....██.....██████...██.....██.██.....██.████████.....███████..██..........████████..██.....██.████.████████...██████...████████.")
+print("............................................................................................................By Christopher Phillips.\n")
 
 
 # This is the menu for the program
@@ -34,33 +25,63 @@ def programLoop():
         print("Please select an option:")
         menuSelection = input("choose (1, 2, 3): ")
 
+        # If the user wants to simulate the game
         if menuSelection == str(1):
 
             # user inputs
+            print("Enter the number of simulations. (Recommended amount is 1000).")
+            simulations = int(input("simulations: "))
             print("Enter the number of players.")
-            players = input("players: ")
+            players = int(input("players: "))
             print("Enter the length of the bridge in segments (must be >= 1).")
-            segments = input("Segments: ")
+            segments = int(input("Segments: "))
             print("Enter the number of tiles per segment (must be >= 2).")
-            tiles = input("Tiles: ")
+            tiles = int(input("Tiles: "))
             print("Enter the number of unsafe panes per segment (must be < number of tiles).")
-            unsafe = input("Unsafe: ")
+            unsafe = int(input("Unsafe: "))
 
-            # This is used so that the checker doesn't return false for having no simulations specified
-            simulations = 1
-
-            # Checker to see if the inputs are valid
+            # Checker to see if the inputs are valid. Function returns a string if invalid.
             selectionChecker = menuSelectionChecker(simulations, players, segments, tiles, unsafe)
 
             if selectionChecker == True:
-                print("All settings good!")
+                print("Given:", players, "players,", segments, "segments,", tiles, "tiles,",
+                      "and", unsafe, "unsafe tiles:")
+                print("The average number of survivors is: ",
+                      averageSuccessRate(simulations, players, segments, tiles, unsafe))
+                # This is a hacky way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
+                ignoreThisVariable = input("Press ENTER to continue...")
             else:
                 print(selectionChecker)
 
+        # If the user wants to play the game
         elif menuSelection == str(2):
-            pass
+
+            # user inputs
+            print("Enter the number of players.")
+            players = int(input("players: "))
+            print("Enter the length of the bridge in segments (must be >= 1).")
+            segments = int(input("Segments: "))
+            print("Enter the number of tiles per segment (must be >= 2).")
+            tiles = int(input("Tiles: "))
+            print("Enter the number of unsafe panes per segment (must be < number of tiles).")
+            unsafe = int(input("Unsafe: "))
+
+            # This allows the number of simulations to be fine and dandy
+            simulations = 1
+
+            # Checker to see if the inputs are valid. Function returns a string if invalid.
+            selectionChecker = menuSelectionChecker(simulations, players, segments, tiles, unsafe)
+
+            if selectionChecker == True:
+                pass
+            else:
+                print(selectionChecker)
+
+        # If the user wants to quit the application
         elif menuSelection == str(3):
             quit(0)
+
+        # If the user didn't enter the correct thing
         else:
             print("\n", menuSelection, "is not a valid option. Please type 1, 2, or 3.\n")
 
