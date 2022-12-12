@@ -5,19 +5,19 @@ from gameSimulator import playGame
 
 
 # This function will return the average number of players that reach the end by simulating a specified amount of times
-def averageSuccessRate(times, players, segments, tiles, safe):
+def averageSuccessRate(simulations, players, segments, tiles, unsafe):
     # the array that stores the number of games
     gameResults = []
     # the sum of gameResults
     newGameResults = 0
 
     # save the results of all the games
-    for i in range(times):
-        gameResults.append(playGame(players, segments, tiles, safe))
+    for i in range(simulations):
+        gameResults.append(playGame(players, segments, tiles, unsafe))
 
     # calculate the sum of everything in the array
-    for i in range(times):
+    for i in range(simulations):
         newGameResults = newGameResults + gameResults[i]
 
     # return the average
-    return round(newGameResults / times)
+    return round(newGameResults / simulations)
