@@ -20,4 +20,4 @@ def averageSuccessRate(simulations, players, segments, tiles, unsafe):
         newGameResults = newGameResults + gameResults[i]
 
     # return the average
-    return round(newGameResults / simulations)
+    return round((newGameResults / simulations), 2)

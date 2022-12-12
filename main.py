@@ -37,7 +37,7 @@ def programLoop():
         if menuSelection == str(1):
 
             # user inputs
-            print("Enter the number of simulations. (Recommended amount is 1000).")
+            print("Enter the number of simulations. (Recommended amount is 10000).")
             simulations = int(input("simulations: "))
             print("Enter the number of players.")
             players = int(input("players: "))
@@ -84,7 +84,7 @@ def programLoop():
 
         # Simulate primary requirement 1
         elif menuSelection == str(4):
-            simulationOutput(1000, 20, 18, 2, 1)
+            simulationOutput(10000, 20, 18, 2, 1)
 
         # Play primary requirement 2
         elif menuSelection == str(5):
@@ -92,7 +92,7 @@ def programLoop():
 
         # Simulate primary requirement 2
         elif menuSelection == str(6):
-            simulationOutput(1000, 20, 18, 3, 1)
+            simulationOutput(10000, 20, 18, 3, 1)
 
         # Play extension requirement 1
         elif menuSelection == str(7):
@@ -100,7 +100,7 @@ def programLoop():
 
         # Simulate extension requirement 1
         elif menuSelection == str(8):
-            simulationOutput(1000, 20, 18, 3, 2)
+            simulationOutput(10000, 20, 18, 3, 2)
 
         # If the user wants to quit the application
         elif menuSelection == str(9):
