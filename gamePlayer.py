@@ -3,6 +3,7 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from bridgeGenerator import bridgeGenerator
 from bridgeRenderer import bridgeObfuscator, bridgeGUI
+from gameSimulator import simulateGame
 
 # This allows the user to play through the game.
 # The user starts with however many specified players that they have and if the player count reaches 0, they lose.
@@ -39,8 +40,8 @@ def playGame(players, segments, tiles, unsafe):
     # start the game at segment 0
     currentSegment = 0
 
-    # TODO: add simulation results for expected player survival rate
-    odds = "undefined"
+    # Average number of players to survive the specified bridge
+    odds = simulateGame(players, segments, tiles, unsafe)
 
     # Game loop. currentSegment will advance once the player count increases
     while currentSegment < len(bridge):
@@ -54,7 +55,7 @@ def playGame(players, segments, tiles, unsafe):
         # Checker to see if tileGuess is wrong
         tileGuess = int(guessChecker(tileGuess, int(len(bridge[0])), obfuscatedBridge[currentSegment]))
 
-        # This code looks similar to the code inside of pawnGuess but it is slightly different
+        # This code looks similar to the pawnGuess code, but it is slightly different
         # Logic for if the player guesses incorrectly
         if bridge[currentSegment][tileGuess] == 1:
             players = players - 1
