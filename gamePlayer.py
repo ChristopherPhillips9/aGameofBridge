@@ -14,18 +14,22 @@ def guessChecker(guess, length, obfuscated):
     # Check to see if the guess is valid against the length of the array
     # Endless loop to return valid input
     while True:
-        # Check to see if the number is in range
-        if -1 < int(guess) < (int(length)):
-            # Check to see if the number is marked X.
-            if obfuscated[int(guess)] != "X":
-                return guess
-            else:
-                print("Error, that tile is already broken")
-                guess = str(input("Input: "))
-
+        # Check to make sure input is not blank
+        if str(guess) == "":
+            print("Error, that input is blank!")
+            guess = input("Input: ")
         else:
-            print("Error, the input is out of range")
-            guess = str(input("Input: "))
+            # Check to see if the number is in range
+            if -1 < int(guess) < (int(length)):
+                # Check to see if the number is marked X.
+                if obfuscated[int(guess)] != "X":
+                    return int(guess)
+                else:
+                    print("Error, that tile is already broken")
+                    guess = input("Input: ")
+            else:
+                print("Error, the input is out of range")
+                guess = input("Input: ")
 
 
 def playGame(players, segments, tiles, unsafe):
@@ -48,9 +52,6 @@ def playGame(players, segments, tiles, unsafe):
 
         # Save the guess from the GUI and reprint the game window
         tileGuess = bridgeGUI(obfuscatedBridge, players, odds)
-
-        # Convert tileGuess into an int
-        tileGuess = int(tileGuess)
 
         # Checker to see if tileGuess is wrong
         tileGuess = int(guessChecker(tileGuess, int(len(bridge[0])), obfuscatedBridge[currentSegment]))
