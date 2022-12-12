@@ -2,8 +2,8 @@
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from bridgeGenerator import bridgeGenerator
-from bridgeRenderer import bridgeObfuscator, bridgeGUI
-from gameSimulator import simulateGame
+from bridgeRenderer import bridgeObfuscator, bridgeGUI, endGameScreen
+from gameResults import averageSuccessRate
 
 # This allows the user to play through the game.
 # The user starts with however many specified players that they have and if the player count reaches 0, they lose.
@@ -35,6 +35,9 @@ def guessChecker(guess, length, obfuscated):
 def playGame(players, segments, tiles, unsafe):
     # This creates the variables for the game and outputs them here
 
+    # Used for the end game screen to display original playercount
+    originalPlayers = players
+
     # Generate the bridge for the game
     bridge = bridgeGenerator(segments, tiles, unsafe)
 
@@ -45,7 +48,7 @@ def playGame(players, segments, tiles, unsafe):
     currentSegment = 0
 
     # Average number of players to survive the specified bridge
-    odds = simulateGame(players, segments, tiles, unsafe)
+    odds = averageSuccessRate(1000, players, segments, tiles, unsafe)
 
     # Game loop. currentSegment will advance once the player count increases
     while currentSegment < len(bridge):
@@ -62,12 +65,15 @@ def playGame(players, segments, tiles, unsafe):
             players = players - 1
             obfuscatedBridge[currentSegment][tileGuess] = "X"
             if players == 0:
-                return 0
+                outcome = "lose"
+                endGameScreen(outcome, odds, players, originalPlayers, segments, tiles, unsafe)
+                return
         # If the guess is correct:
         # The currentSegment increases. The tile is replaced with C. This helps visualize the game
         elif bridge[currentSegment][tileGuess] == 0:
             obfuscatedBridge[currentSegment][tileGuess] = "C"
             currentSegment = currentSegment + 1
             if currentSegment >= len(bridge):
-                print("Game won!")
-                return players
+                outcome = "win"
+                endGameScreen(outcome, odds, players, originalPlayers, segments, tiles, unsafe)
+                return
