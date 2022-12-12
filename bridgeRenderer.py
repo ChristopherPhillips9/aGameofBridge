@@ -21,7 +21,7 @@ def bridgeObfuscator(bridge):
     return displayBridge
 
 
-def bridgePrint(bridge, players, odds):
+def bridgeGUI(bridge, players, odds):
     # This is the window that the player sees. It also prints instructions
     # This function returns the choice the player made
 
@@ -29,7 +29,7 @@ def bridgePrint(bridge, players, odds):
     print("\n\n")
     print("Key: █ = unknown tile, X = incorrect tile, C = correct guess")
     print("\nplayers remaining:", players)
-    print("\nChances of the current player surviving:", math)
+    print("\nChances of the current player surviving:", )
     print("\nAverage survival amount for this bridge:", odds)
 
     # print the bridge
@@ -48,6 +48,5 @@ def bridgePrint(bridge, players, odds):
         elif i < 100:
             print("segment " + str(i) + ": " + displayBridgeSegment)
 
-
-
-bridgePrint(bridgeGenerator(18, 3, 1))
+    print("\n Which tile will you move to next? choose a tile from 0 to "+ str(len(bridge[i])-1))
+    return input("Input: ")
