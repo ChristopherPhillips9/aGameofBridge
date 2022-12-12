@@ -49,4 +49,4 @@ def bridgeGUI(bridge, players, odds):
             print("segment " + str(i) + ": " + displayBridgeSegment)
 
     print("\n Which tile will you move to next? choose a tile from 0 to "+ str(len(bridge[i])-1))
-    return input("Input: ")
+    return int(input("Input: "))
