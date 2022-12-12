@@ -21,10 +21,17 @@ def programLoop():
     while True:
         print(" 1) Simulate the average number of survivors")
         print(" 2) Play the game yourself")
-        print(" 3) Quit")
+        print(" 3) Play primary requirement 1")
+        print(" 4) Simulate primary requirement 1")
+        print(" 5) Play primary requirement 2")
+        print(" 6) Simulate primary requirement 2")
+        print(" 7) Play extension requirement 1")
+        print(" 8) Simulate extension requirement 1")
+        print(" 9) Quit")
+        print("")
 
         print("Please select an option:")
-        menuSelection = input("choose (1, 2, 3): ")
+        menuSelection = input("choose (1 to 9): ")
 
         # If the user wants to simulate the game
         if menuSelection == str(1):
@@ -45,12 +52,7 @@ def programLoop():
             selectionChecker = menuSelectionChecker(simulations, players, segments, tiles, unsafe)
 
             if selectionChecker == True:
-                print("Given:", players, "players,", segments, "segments,", tiles, "tiles,",
-                      "and", unsafe, "unsafe tiles:")
-                print("The average number of survivors is: ",
-                      averageSuccessRate(simulations, players, segments, tiles, unsafe))
-                # This is a hacky way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
-                ignoreThisVariable = input("Press ENTER to continue...")
+                simulationOutput(simulations, players, segments, tiles, unsafe)
             else:
                 print(selectionChecker)
 
@@ -67,7 +69,7 @@ def programLoop():
             print("Enter the number of unsafe panes per segment (must be < number of tiles).")
             unsafe = int(input("Unsafe: "))
 
-            # Checker to see if the inputs are valid. Function returns a string if invalid.
+            # Checker to see if the inputs are valid. Function returns an error message if invalid.
             # "simulations" is preset to 1 to not flag the amount of simulations as wrong
             selectionChecker = menuSelectionChecker(1, players, segments, tiles, unsafe)
 
@@ -76,13 +78,37 @@ def programLoop():
             else:
                 print(selectionChecker)
 
-        # If the user wants to quit the application
+        # Play primary requirement 1
         elif menuSelection == str(3):
+            playGame(20, 18, 2, 1)
+
+        # Simulate primary requirement 1
+        elif menuSelection == str(4):
+            simulationOutput(1000, 20, 18, 2, 1)
+
+        # Play primary requirement 2
+        elif menuSelection == str(5):
+            playGame(20, 18, 3, 1)
+
+        # Simulate primary requirement 2
+        elif menuSelection == str(6):
+            simulationOutput(1000, 20, 18, 3, 1)
+
+        # Play extension requirement 1
+        elif menuSelection == str(7):
+            playGame(20, 18, 3, 2)
+
+        # Simulate extension requirement 1
+        elif menuSelection == str(8):
+            simulationOutput(1000, 20, 18, 3, 2)
+
+        # If the user wants to quit the application
+        elif menuSelection == str(9):
             quit(0)
 
         # If the user didn't enter the correct thing
         else:
-            print("\n", menuSelection, "is not a valid option. Please type 1, 2, or 3.\n")
+            print("\n", menuSelection, "is not a valid option. Please type a number 1 to 9.\n")
 
 
 def menuSelectionChecker(simulations, players, segments, tiles, unsafe):
@@ -109,6 +135,15 @@ def menuSelectionChecker(simulations, players, segments, tiles, unsafe):
         return True
     else:
         return errorMessage
+
+
+def simulationOutput(simulations, players, segments, tiles, unsafe):
+    print("Given:", players, "players,", segments, "segments,", tiles, "tiles,",
+          "and", unsafe, "unsafe tiles:")
+    print("The average number of survivors is: ",
+          averageSuccessRate(simulations, players, segments, tiles, unsafe))
+    # This is a  way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
+    ignoreThisVariable = input("Press ENTER to continue...")
 
 
 programLoop()
