@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
-from gameSimulator import playGame
+from gameSimulator import simulateGame
 
 
 # This function will return the average number of players that reach the end by simulating a specified amount of times
@@ -13,7 +13,7 @@ def averageSuccessRate(simulations, players, segments, tiles, unsafe):
 
     # save the results of all the games
     for i in range(simulations):
-        gameResults.append(playGame(players, segments, tiles, unsafe))
+        gameResults.append(simulateGame(players, segments, tiles, unsafe))
 
     # calculate the sum of everything in the array
     for i in range(simulations):

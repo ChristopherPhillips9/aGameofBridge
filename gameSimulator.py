@@ -43,7 +43,7 @@ def playingBoard(players, bridge):
                 return remainingPlayers
 
 
-def playGame(players, segments, tiles, incorrect):
+def simulateGame(players, segments, tiles, incorrect):
     # Generates a bridge for the game to be played on
     bridge = bridgeGenerator(segments, tiles, incorrect)
 
