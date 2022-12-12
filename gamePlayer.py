@@ -9,14 +9,21 @@ from bridgeRenderer import bridgeObfuscator, bridgeGUI
 # If the player plays multiple times than the average amount of survivors will be printed out
 
 
-def guessChecker(guess, length):
+def guessChecker(guess, length, obfuscated):
     # Check to see if the guess is valid against the length of the array
     # Endless loop to return valid input
     while True:
+        # Check to see if the number is in range
         if -1 < int(guess) < (int(length)):
-            return guess
+            # Check to see if the number is marked X.
+            if obfuscated[int(guess)] != "X":
+                return guess
+            else:
+                print("Error, that tile is already broken")
+                guess = str(input("Input: "))
+
         else:
-            print("Error, the input is out or range")
+            print("Error, the input is out of range")
             guess = str(input("Input: "))
 
 
@@ -45,7 +52,7 @@ def playGame(players, segments, tiles, unsafe):
         tileGuess = int(tileGuess)
 
         # Checker to see if tileGuess is wrong
-        tileGuess = int(guessChecker(tileGuess, int(len(bridge[0]))))
+        tileGuess = int(guessChecker(tileGuess, int(len(bridge[0])), obfuscatedBridge[currentSegment]))
 
         # This code looks similar to the code inside of pawnGuess but it is slightly different
         # Logic for if the player guesses incorrectly
