@@ -2,6 +2,7 @@
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from gameResults import averageSuccessRate
+from gamePlayer import playGame
 
 # Cool title image. Nothing else.
 print("\n....███........██████......███....██.....██.████████.....███████..████████....████████..████████..████.████████...██████...████████.")
@@ -66,14 +67,12 @@ def programLoop():
             print("Enter the number of unsafe panes per segment (must be < number of tiles).")
             unsafe = int(input("Unsafe: "))
 
-            # This allows the number of simulations to be fine and dandy
-            simulations = 1
-
             # Checker to see if the inputs are valid. Function returns a string if invalid.
-            selectionChecker = menuSelectionChecker(simulations, players, segments, tiles, unsafe)
+            # "simulations" is preset to 1 to not flag the amount of simulations as wrong
+            selectionChecker = menuSelectionChecker(1, players, segments, tiles, unsafe)
 
             if selectionChecker == True:
-                pass
+                playGame(players, segments, tiles, unsafe)
             else:
                 print(selectionChecker)
 
