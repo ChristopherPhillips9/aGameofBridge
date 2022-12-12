@@ -49,5 +49,33 @@ def bridgeGUI(bridge, players, odds):
         elif i < 100:
             print("segment " + str(i) + ": " + displayBridgeSegment)
 
-    print("\nWhich tile will you move to next? choose a tile from 0 to "+ str(len(bridge[i])-1))
+    print("\nWhich tile will you move to next? choose a tile from 0 to " + str(len(bridge[i]) - 1))
     return input("Input: ")
+
+
+def endGameScreen(outcome, odds, survivors, players, segments, tiles, unsafe):
+    # This screen displays once the player has won the game
+    if outcome == "win":
+        print("\n..................................................................")
+        print("..##############################################################..")
+        print("..#............................................................#..")
+        print("..#..██..██..██████..██..██....██..██..██..████..██....██..██..#..")
+        print("..#..██..██..██..██..██..██....██..██..██...██...████..██..██..#..")
+        print("..#...████...██..██..██..██....██..██..██...██...██.██.██..██..#..")
+        print("..#....██....██..██..██..██....██..██..██...██...██..████......#..")
+        print("..#....██....██████..██████......██..██....████..██....██..██..#..")
+        print("..#............................................................#..")
+        print("..##############################################################..")
+        print("..................................................................\n")
+    else:
+        print("\nYou lost!\n")
+
+    print("Stats:")
+    print("Game parameters:", players, "players,", segments, "segments,", tiles, "tiles, and", unsafe, "unsafe tiles")
+    print("Average number of survivors for this bridge:", odds)
+    print("Average number of survivors per game:", survivors, "out of", players)
+    print("")
+
+    # This is a  way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
+    ignoreThisVariable = input("Press ENTER to continue...")
+
