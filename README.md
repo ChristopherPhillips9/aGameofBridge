@@ -98,10 +98,10 @@ If the random number corresponds to a 0 in bridgeColumn, it will be replaced wit
 Once the bridgeColumn has the correct number of unsafe panes, it will append itself to bridgeRow.
 Once bridgeRow reaches the correct number of segments, the function will return the randomized bridge.</p>
 
-<h3>gamePlayer.py overview:</h3>
+### gamePlayer.py overview:
 
-<h3>gameResults.py overview</h3>
+### gameResults.py overview
 
-<h3>gameSimulator.py overview</h3>
+### gameSimulator.py overview
 
-<h3>pawnGuess.py overview</h3>
+### pawnGuess.py overview
