@@ -130,6 +130,16 @@ Once the current segment value is equal to the length of the bridge, bridgeRende
 
 ### gameResults.py overview
 
+This file contains one function named averageSuccessRate.
+It returns the average number of survivors that reach the end of the bridge.
+
+averageSuccessRate() takes the input of simulations, players, segments, tiles, and unsafe tiles.
+It creates an array called gameResults that will store all the simulated game outputs.
+It also defines an integer to be the sum of the game results.
+A for loop will play through all the simulations using the parameters and append them to gameResults.
+The function will then add all the results together.
+It will return the average number of results rounded to two decimal places
+
 ### gameSimulator.py overview
 
 ### pawnGuess.py overview
