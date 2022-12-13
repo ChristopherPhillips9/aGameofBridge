@@ -73,7 +73,7 @@ def endGameScreen(outcome, odds, survivors, players, segments, tiles, unsafe):
     print("Stats:")
     print("Game parameters:", players, "players,", segments, "segments,", tiles, "tiles, and", unsafe, "unsafe tiles")
     print("Average number of survivors for this bridge:", odds)
-    print("Average number of survivors per game:", survivors, "out of", players)
+    print("Survivors for this game:", survivors, "out of", players)
     print("")
 
     # This is a  way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
