@@ -100,6 +100,34 @@ Once bridgeRow reaches the correct number of segments, the function will return 
 
 ### gamePlayer.py overview:
 
+These functions allow the game to be played by the user. It contains two functions.
+
+- guessChecker()
+- playGame()
+
+guessChecker() is a simple checker to make sure the player enters a value that is correct.
+It is not comprehensive of all incorrect inputs.
+However, it makes sure that the user does not accidentally input a number out of the range of the segment, or an input of "".
+If the user does enter an incorrect input, they are prompted to enter a new number.
+The program returns the int of a valid guess.
+
+playGame() takes the input from main.programLoop().
+It takes the input of players, segments, tiles, and unsafe tiles.
+It creates a copy of the value of players. Next it generates a bridge from bridgeGenerator using the parameters.
+Next it creates an obfuscated copy of the bridge from bridgeRenderer.bridgeObfuscator().
+Next it specifies that the current segment starts at 0 so that the game starts at the first segment.
+
+A while loop runs through the game until the current segment value reaches the last segment in the bridge.
+Inside this loop, the obfuscated bridge, players, and average survival rate for this bridge are all sent to bridgeRenderer.bridgeGUI.
+After the user makes a guess, the guess is checked for errors using guessChecker.
+
+The loop checks to see if the guess was correct or not. If the user guessed an element in the list marked 1, the number of players will be decreased.
+The element in the obfuscated bridge will also be marked X.
+If the number of players reaches 0 then it will run bridgeRenderer.endGameScreen with the "you lose" message.
+If the user guessed an element in the list marked 0, the current segment count is advanced by 1.
+The element in the obfuscated bridge will also be marked C.
+Once the current segment value is equal to the length of the bridge, bridgeRender.endGameScreen will be run with the "you win" message.
+
 ### gameResults.py overview
 
 ### gameSimulator.py overview
