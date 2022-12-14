@@ -4,30 +4,10 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 from bridgeGenerator import bridgeGenerator
 from gameRenderer import bridgeObfuscator, bridgeGUI, endGameScreen
 from gameResults import averageSuccessRate
-
+from oddsOfSurvival import oddsOfTheCurrentPlayerSurviving
 # This allows the user to play through the game.
 # The user starts with however many specified players that they have and if the player count reaches 0, they lose.
 # If the player plays multiple times than the average amount of survivors will be printed out
-
-
-def oddsOfTheCurrentPlayerSurviving(totalSegments, currentPanes, unsafe, currentUnsafe, currentSegment, totalPanes):
-    # Calculates the odds of the current player surviving the current segment.
-    odds = [((currentPanes - currentUnsafe) / currentPanes)]
-
-    # Calculates the rest of the chances of surviving the panes and adds them up.
-    for i in range(totalSegments - currentSegment - 1):
-        odds.append((totalPanes - unsafe) / totalPanes)
-    print(odds)
-
-    # Multiplies all the odds together
-    newOdds = 1
-
-    for i in range(len(odds)):
-        newOdds = newOdds * odds[i]
-
-    # Multiplies newOdds by 100 to return a percentage
-    newOdds = (newOdds * 100)
-    return newOdds
 
 
 def guessChecker(guess, length, obfuscated):
