@@ -13,7 +13,7 @@ from gameResults import averageSuccessRate
 
 def oddsOfTheCurrentPlayerSurviving(segments, tiles, unsafe, current):
     # Calculates the odds of the current player surviving.
-    odds = ((unsafe / tiles) ** (segments - current)) * 100
+    odds = (((tiles - unsafe) / tiles) ** (segments - current)) * 100
 
     return odds
 
