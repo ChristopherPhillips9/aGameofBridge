@@ -142,4 +142,52 @@ It will return the average number of results rounded to two decimal places
 
 ### gameSimulator.py overview
 
+This file contains functions that simulate the game one time. It contains two functions.
+
+- playingBoard()
+- simulateGame()
+
+playingBoard() simulates playing through a bridge. It will return the number of players that survive the bridge.
+It first defines the remaining players as the number of players specified.
+A while loop runs until currentSegment is equal to the length of the bridge.
+Unlike the gamePlayer, which makes two separate bridges (one for display, and one as the original bridge),
+this program will modify the original bridge. It does so to process which tiles have been guessed and which have not.
+Since the bridge will never be seen, there is no reason not to.
+
+First, it gets a guess from pawnGuess.
+Next, If the guessed pane is equal to 1, it will subtract 1 from the remaining players. It will also replace the pane value with "X".
+If the remaining players are equal to 0, the game will end and the function will return 0.
+If the guessed pane is equal to 0, the current segment is advanced. It will also replace the pane value with "C".
+If that was the last segment, then the game will return the number of players.
+
+simulateGame() Generates a random bridge and then plays through the game. It saves the results and returns them.
+
 ### pawnGuess.py overview
+
+pawnGuess makes a random guess given a segment from a bridge. It contains two functions:
+
+- pawnGuess()
+- guessReconstructor()
+
+pawnGuess() creates two empty strings called currentWithoutInt and currentWithoutStr.
+It is given the current segment called current.
+
+currentWithoutInt is populated with all 0's for the length of the function.
+It then has its 0's replaced with X's that are in the list 'current'.
+For example:
+
+- if current = [1, 0, X, 0, X, 1, 0], then currentWithoutInt will equal [0, 0, X, 0, X, 0, 0]
+
+currentWithoutStr has all the int values from current applied to it.
+For example:
+
+- if current = [1, 0, X, 0, X, 1, 0] then currentWithoutStr will equal [1, 0, 0, 1, 0]
+
+It will then make a random selection called randomListSelection from currentWithoutInt.
+With that value, it will replace the original value in currentWithoutInt. 
+It will then take these two lists and run them through guessReconstructor().
+It will then return the value that guessReconstructor gave it.
+
+guessReconstructor() takes the two lists. It runs them through a loop for the length of currentWithoutInt.
+Every element that is not "X" in currentWithoutInt will be changed to the value from currentWithoutInt.
+Once the value of G is found, it will return that value.
