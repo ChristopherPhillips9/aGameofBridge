@@ -5,17 +5,29 @@ from bridgeGenerator import bridgeGenerator
 from gameRenderer import bridgeObfuscator, bridgeGUI, endGameScreen
 from gameResults import averageSuccessRate
 
-
 # This allows the user to play through the game.
 # The user starts with however many specified players that they have and if the player count reaches 0, they lose.
 # If the player plays multiple times than the average amount of survivors will be printed out
 
 
-def oddsOfTheCurrentPlayerSurviving(segments, tiles, unsafe, current):
-    # Calculates the odds of the current player surviving.
-    odds = (((tiles - unsafe) / tiles) ** (segments - current)) * 100
+def oddsOfTheCurrentPlayerSurviving(totalSegments, currentPanes, unsafe, currentUnsafe, currentSegment, totalPanes):
+    # Calculates the odds of the current player surviving the current segment.
+    odds = [((currentPanes - currentUnsafe) / currentPanes)]
 
-    return odds
+    # Calculates the rest of the chances of surviving the panes and adds them up.
+    for i in range(totalSegments - currentSegment - 1):
+        odds.append((totalPanes - unsafe) / totalPanes)
+    print(odds)
+
+    # Multiplies all the odds together
+    newOdds = 1
+
+    for i in range(len(odds)):
+        newOdds = newOdds * odds[i]
+
+    # Multiplies newOdds by 100 to return a percentage
+    newOdds = (newOdds * 100)
+    return newOdds
 
 
 def guessChecker(guess, length, obfuscated):
@@ -58,11 +70,23 @@ def playGame(players, segments, tiles, unsafe):
     # Average number of players to survive the specified bridge
     odds = averageSuccessRate(1000, players, segments, tiles, unsafe)
 
+    # Used for odds of the current player winning
+    remainingSafePanes = tiles
+    remainingUnsafePanes = unsafe
+
     # Game loop. currentSegment will advance once the player count increases
     while currentSegment < len(bridge):
 
         # Calculate the odds of the current player winning
-        oddsOf1PlayerSurvival = oddsOfTheCurrentPlayerSurviving(segments, tiles, unsafe, currentSegment)
+        oddsOf1PlayerSurvival = oddsOfTheCurrentPlayerSurviving(
+            segments,
+            remainingSafePanes,
+            unsafe,
+            remainingUnsafePanes,
+            currentSegment,
+            tiles
+        )
+
         # Save the guess from the GUI and reprint the game window
         tileGuess = bridgeGUI(obfuscatedBridge, players, odds, oddsOf1PlayerSurvival)
 
@@ -73,6 +97,11 @@ def playGame(players, segments, tiles, unsafe):
         # Logic for if the player guesses incorrectly
         if bridge[currentSegment][tileGuess] == 1:
             players = players - 1
+
+            # Decreases the count of the remaining safe and unsafe tiles by 1
+            remainingSafePanes = remainingSafePanes - 1
+            remainingUnsafePanes = remainingUnsafePanes - 1
+
             obfuscatedBridge[currentSegment][tileGuess] = "X"
             if players == 0:
                 outcome = "lose"
@@ -83,6 +112,11 @@ def playGame(players, segments, tiles, unsafe):
         elif bridge[currentSegment][tileGuess] == 0:
             obfuscatedBridge[currentSegment][tileGuess] = "C"
             currentSegment = currentSegment + 1
+
+            # Resets the count for unsafe and safe panes because the game moves to a new segment
+            remainingSafePanes = tiles
+            remainingUnsafePanes = unsafe
+
             if currentSegment >= len(bridge):
                 outcome = "win"
                 endGameScreen(outcome, odds, players, originalPlayers, segments, tiles, unsafe)

@@ -28,7 +28,7 @@ def bridgeGUI(bridge, players, odds, survival):
     print("\n\n")
     print("Key: █ = unknown tile, X = incorrect guess, C = correct guess")
     print("players remaining:", players)
-    print("Chances of the current player surviving:", str(round(survival, 5)) + "%")
+    print("Chances of the current player winning:", str(round(survival, 5)) + "%")
     print("Average survival amount for this bridge type:", odds)
     print("")
 
