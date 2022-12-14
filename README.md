@@ -168,6 +168,19 @@ If that was the last segment, then the game will return the number of players.
 
 simulateGame() Generates a random bridge and then plays through the game. It saves the results and returns them.
 
+### oddsOfSurvival.py Overview
+
+This file contains a single function used to calculate the odds of survival for one player.
+It takes the remaining number of segments, the segment length, how many unsafe panes are in the segment,
+and the number of guessed panes in a segment.
+It calculates the number of panes minus the number of dangerous panes, then divides that number by the number of panes to get a fraction.
+For example, if there are two panes and 1 is an unsafe tile, the answer will be 0.5.
+
+It then calculates the rest of the values for each decreasing segment amount until the segment amount is 0.
+
+It takes these numbers and stores them in a list.
+The product of that list is then multiplied by 100 to return a percentage.
+
 ### pawnGuess.py Overview
 
 pawnGuess makes a random guess given a segment from a bridge. It contains two functions:
@@ -197,3 +210,4 @@ It will then return the value that guessReconstructor gave it.
 guessReconstructor() takes the two lists. It runs them through a loop for the length of currentWithoutInt.
 Every element that is not "X" in currentWithoutInt will be changed to the value from currentWithoutInt.
 Once the value of G is found, it will return that value.
+
