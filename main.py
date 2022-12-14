@@ -45,7 +45,7 @@ def programLoop():
             segments = int(input("Segments: "))
             print("Enter the number of tiles per segment (must be >= 2).")
             tiles = int(input("Tiles: "))
-            print("Enter the number of unsafe panes per segment (must be < number of tiles).")
+            print("Enter the number of unsafe tiles per segment (must be < number of tiles).")
             unsafe = int(input("Unsafe: "))
 
             # Checker to see if the inputs are valid. Function returns a string if invalid.
@@ -66,7 +66,7 @@ def programLoop():
             segments = int(input("Segments: "))
             print("Enter the number of tiles per segment (must be >= 2).")
             tiles = int(input("Tiles: "))
-            print("Enter the number of unsafe panes per segment (must be < number of tiles).")
+            print("Enter the number of unsafe tiles per segment (must be < number of tiles).")
             unsafe = int(input("Unsafe: "))
 
             # Checker to see if the inputs are valid. Function returns an error message if invalid.
