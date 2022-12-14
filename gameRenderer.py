@@ -4,7 +4,6 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 # Takes a bridge generated from bridgeGenerator and makes it display friendly for players.
 
 from copy import deepcopy
-from bridgeGenerator import bridgeGenerator
 
 
 def bridgeObfuscator(bridge):
@@ -21,7 +20,7 @@ def bridgeObfuscator(bridge):
     return displayBridge
 
 
-def bridgeGUI(bridge, players, odds):
+def bridgeGUI(bridge, players, odds, survival):
     # This is the window that the player sees. It also prints instructions
     # This function returns the choice the player made
 
@@ -29,7 +28,7 @@ def bridgeGUI(bridge, players, odds):
     print("\n\n")
     print("Key: █ = unknown tile, X = incorrect guess, C = correct guess")
     print("players remaining:", players)
-    print("Chances of the current player surviving:", )
+    print("Chances of the current player surviving:", str(round(survival, 5)) + "%")
     print("Average survival amount for this bridge type:", odds)
     print("")
 
@@ -78,4 +77,3 @@ def endGameScreen(outcome, odds, survivors, players, segments, tiles, unsafe):
 
     # This is a  way to get the menu to pause. It needs a variable otherwise it will require 2 "enters"
     ignoreThisVariable = input("Press ENTER to continue...")
-

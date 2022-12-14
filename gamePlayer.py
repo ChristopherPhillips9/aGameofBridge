@@ -2,12 +2,20 @@
 __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from bridgeGenerator import bridgeGenerator
-from bridgeRenderer import bridgeObfuscator, bridgeGUI, endGameScreen
+from gameRenderer import bridgeObfuscator, bridgeGUI, endGameScreen
 from gameResults import averageSuccessRate
+
 
 # This allows the user to play through the game.
 # The user starts with however many specified players that they have and if the player count reaches 0, they lose.
 # If the player plays multiple times than the average amount of survivors will be printed out
+
+
+def oddsOfTheCurrentPlayerSurviving(segments, tiles, unsafe, current):
+    # Calculates the odds of the current player surviving.
+    odds = ((unsafe / tiles) ** (segments - current)) * 100
+
+    return odds
 
 
 def guessChecker(guess, length, obfuscated):
@@ -35,7 +43,7 @@ def guessChecker(guess, length, obfuscated):
 def playGame(players, segments, tiles, unsafe):
     # This creates the variables for the game and outputs them here
 
-    # Used for the end game screen to display original playercount
+    # Used for the end game screen to display original player amount
     originalPlayers = players
 
     # Generate the bridge for the game
@@ -53,8 +61,10 @@ def playGame(players, segments, tiles, unsafe):
     # Game loop. currentSegment will advance once the player count increases
     while currentSegment < len(bridge):
 
+        # Calculate the odds of the current player winning
+        oddsOf1PlayerSurvival = oddsOfTheCurrentPlayerSurviving(segments, tiles, unsafe, currentSegment)
         # Save the guess from the GUI and reprint the game window
-        tileGuess = bridgeGUI(obfuscatedBridge, players, odds)
+        tileGuess = bridgeGUI(obfuscatedBridge, players, odds, oddsOf1PlayerSurvival)
 
         # Checker to see if tileGuess is wrong
         tileGuess = int(guessChecker(tileGuess, int(len(bridge[0])), obfuscatedBridge[currentSegment]))
