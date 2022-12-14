@@ -4,14 +4,14 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 # This file is to play the game from what bridgeGenerator.py generates. It will return the number of players that make
 # it across. If there are 20 players, it might return anywhere from 20-0 people depending on how many make it
 
-# pawn = the person who will be trying to make it across
-
 from random import randint
 from bridgeGenerator import bridgeGenerator
 from pawnGuess import pawnGuess
 
 
 def playingBoard(players, bridge):
+    # Simulates playing through a bridge.
+
     # Define the number of players remaining
     remainingPlayers = players
 
@@ -44,6 +44,8 @@ def playingBoard(players, bridge):
 
 
 def simulateGame(players, segments, tiles, incorrect):
+    # Generates a random bridge and saves the results of playing through it.
+
     # Generates a bridge for the game to be played on
     bridge = bridgeGenerator(segments, tiles, incorrect)
 
