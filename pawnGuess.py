@@ -3,6 +3,7 @@ __author__ = "Christopher Phillips, christopher.phillips9@snhu.edu"
 
 from random import randint
 
+#
 
 def guessReconstructor(list1, list2):
     # Reconstructs the guess from pawnGuess() back together to produce a meaningful output.
@@ -38,7 +39,6 @@ def pawnGuess(current):
 
     # Loop to apply all X's to currentWithoutInt from their position in current.
     for i in range(len(current)):
-
         if isinstance(current[i], str):
             currentWithoutInt[i] = "X"
 
@@ -49,9 +49,9 @@ def pawnGuess(current):
 
     # Make the guess
     # Choose a random integer between 0 and the length of currentWithoutStr.
-    randomArraySelection = randint(0, len(currentWithoutStr) - 1)
+    randomListSelection = randint(0, len(currentWithoutStr) - 1)
     # Take that number and apply it to the position in currentWithoutStr. "G" stands for guess
-    currentWithoutStr[randomArraySelection] = "G"
+    currentWithoutStr[randomListSelection] = "G"
 
     # Tie it all together with guessReconstructor()
     currentWithoutInt = guessReconstructor(currentWithoutStr, currentWithoutInt)
@@ -68,4 +68,4 @@ def pawnGuess(current):
 # pawnGuess([0, "X"])
 
 # returns 1, 3, or 4:
-# pawnGuess(["X", 0, "X", 1, 0, "X"])
+# print(pawnGuess(["X", 0, "X", 1, 0, "X"]))
