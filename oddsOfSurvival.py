@@ -11,7 +11,6 @@ def oddsOfTheCurrentPlayerSurviving(totalSegments, currentPanes, unsafe, current
     # Calculates the rest of the chances of surviving the panes and adds them up.
     for i in range(totalSegments - currentSegment - 1):
         odds.append((totalPanes - unsafe) / totalPanes)
-    print(odds)
 
     # Multiplies all the odds together
     newOdds = 1
