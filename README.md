@@ -211,3 +211,278 @@ guessReconstructor() takes the two lists. It runs them through a loop for the le
 Every element that is not "X" in currentWithoutInt will be changed to the value from currentWithoutInt.
 Once the value of G is found, it will return that value.
 
+## Observations and Data:
+
+### Introduction:
+
+Meaningful data can be gathered from the functions in this program.
+Most notably, gameResults.averageSuccessRate() and oddsOfSurvival.oddsOfTheCurrentPlayerSurviving.
+
+The observations folder contains all of the methods used to generate the data and attempts to generalize the bridge problem.
+All of the functions and their calculations can be found in ./observations/observations.py.
+
+### Initial Observations:
+
+Bridges conceptually are a function to reduce the number of players in a fairly consistent way.
+A bridge has an input of the bridge parameters and players and outputs players that is either smaller or equal to the input.
+For gameshows, or TV shows about gameshows, they are an easy way to scale down player counts by an expected range of numbers.
+Assuming that everyone follows the game rules.
+
+Due to the rules of the game, it is worth noting that it is possible to make it guaranteed to have survivors.
+This is done by making the number of unsafe panes in total smaller than the number of players.
+
+### Baseline:
+
+All of the data and graphs are based on the parameters for primary requirements question 1.
+That is, 18 segments, 2 panes, 1 unsafe pane, and 20 players.
+All simulations are ran 100,000 times for accuracy per incremental change.
+Meaning the game is simulated in total 1,000,000 times if there are 10 x increments for a question.
+
+### Observation 1: What Happens if the Number of Segments Increases?
+
+Starting with the baseline, the number of segments will increase from 18 to 28 using a loop.
+This function is called increasingNumberOfSegments().
+This is the output:
+
+x is the number of segments, and y is the number of survivors:
+- x: 18 y: 10.99
+- x: 19 y: 10.5
+- x: 20 y: 10
+- x: 21 y: 9.5
+- x: 22 y: 8.99
+- x: 23 y: 8.49
+- x: 24 y: 8.0
+- x: 25 y: 7.51
+- x: 26 y: 7.0
+- x: 27 y: 6.5
+
+If the numbers are rounded to the first decimal place,
+it is clear that with every segment, there are 1/2 fewer survivors on average that make it.
+This result makes this a linear equation.
+
+This is a graphical representation from Desmos.com:
+
+![Graph for observation 1](observations/increasingBridgeLength.PNG "Graph for observation 1")
+
+It is easy to place a line through this, and this is a classic example of the y = mx+b formula.
+
+![Graph with line for observation 1](observations/increasingBridgeLengthWithLine.PNG "Graph with line for observation 1")
+
+This is the formula for this operation:
+
+![Equation for observation 1](observations/increasingBridgeLengthWithLineFormula.PNG "Equation for observation 1")
+
+After 40 segments, we are almost guaranteed no survivors.
+
+### Observation 2: What Happens if the Number of Panes Increases, but Not the Number of Unsafe Panes?
+
+Starting with the baseline, what happens if the amount of panes increases, but the number of unsafe panes does not?
+This refers to the width of the bridge increasing.
+The chances of surviving each segment increases greatly from 1/2 to 2/3, and so on. This is the output:
+
+x is the number of panes, and y is the number of survivors: 
+
+- x: 2 y: 11.0
+- x: 3 y: 13.99
+- x: 4 y: 15.49
+- x: 5 y: 16.41
+- x: 6 y: 16.99
+- x: 7 y: 17.42
+- x: 8 y: 17.75
+- x: 9 y: 18.01
+- x: 10 y: 18.19
+- x: 11 y: 18.37
+- x: 12 y: 18.51
+
+The graphical representation looks like this:
+
+![Graph for observation 2](observations/increasingSegmentAmount.PNG "Graph for observation 2")
+
+This follows a similar curve to this forumula:
+
+![Equation for observation 2](observations/increasingSegmentAmountEquation.PNG "Graph for observation 3")
+
+This function is not translated, but it could be moved to fit the curve demonstrated in this question.
+
+### Observation 3: What Happens if the Number of Panes Increase and the Number of Unsafe Panes?
+
+Starting with the baseline, what happens if the number of panes increases with the number of unsafe panes?
+
+This is similar to the extension requirement question 2, where there are now three panes per segment and two of which are unsafe.
+This is the output:
+
+x is the increase of panes and segments, and y is the number of survivors:
+
+- x: 18 y: 10.99
+- x: 19 y: 2.59
+- x: 20 y: 0.14
+- x: 21 y: 0.01
+- x: 22 y: 0.0
+- x: 23 y: 0.0
+- x: 24 y: 0.0
+- x: 25 y: 0.0
+- x: 26 y: 0.0
+- x: 27 y: 0.0
+
+The decrease is exponential. That is exactly what expansion requirement 2 set out to demonstrate.
+
+![Graph for observation 3](observations/increasingNumberOfTilesAndUnsafeTiles.PNG "Graph for observation 3")
+
+### Question 4: Increasing Number of Players
+
+It is already true that it is impossible to have 0 survivors from the first bridge.
+However, there is a point where the number of players surviving become linear by adding more players.
+
+This is the output of increasing the number of players:
+
+- x: 1 y: 0.0
+- x: 2 y: 0.0
+- x: 3 y: 0.0
+- x: 4 y: 0.0
+- x: 5 y: 0.02
+- x: 6 y: 0.07
+- x: 7 y: 0.19
+- x: 8 y: 0.43
+- x: 9 y: 0.84
+- x: 10 y: 1.42
+- x: 11 y: 2.19
+- x: 12 y: 3.07
+- x: 13 y: 4.03
+- x: 14 y: 5.01
+- x: 15 y: 6.01
+- x: 16 y: 6.99
+- x: 17 y: 7.99
+- x: 18 y: 9.0
+- x: 19 y: 10.0
+
+This is a graphical representation of the function:
+
+![Graph for observation 4](observations/increasingNumberOfPlayers.PNG "Graph for observation 4")
+
+The function starts to linearly rise around y 9.
+This could be useful for calculating a difficulty for a given bridge or making the outcome less predictable.
+This could mean that around 9 players, the game is subjectively most suspenseful.
+
+We can find a line that intersects the linear portion of this graph.
+
+![Line for observation 4](observations/increasingNumberOfPlayersWithLine.PNG "Line for observation 4")
+
+This is the formula for this line graph:
+
+![Equation for observation 4](observations/increasingNumberOfPlayersEquation.PNG "Equation for observation 4")
+
+Using this formula, 9 is the point where the graph reaches linearity.
+It is also worth noting that for every increase past that, it increases by 1 each time.
+
+### Observation 5: Increasing Number of Players and Segments 
+
+This function is achieved by increasing both the number of players and segments by 1.
+The number of players starts at 20, and the number of segments starts at 18.
+The next iteration would be 21 players and 19 segments.
+
+x is the increase of the number of segments, and y is the number of survivors:
+
+Note: The number of player increases follows x but is not x itself
+
+- x: 20 y: 10.99
+- x: 21 y: 11.5
+- x: 22 y: 12.0
+- x: 23 y: 12.48
+- x: 24 y: 13.0
+- x: 25 y: 13.5
+- x: 26 y: 14.0
+- x: 27 y: 14.5
+- x: 28 y: 15.01
+- x: 29 y: 15.5
+
+This is the graphical representation for the function:
+
+![Graph for observation 5](observations/IncreasingPlayersAndSegments.PNG "Graph for observation 5")
+
+This is inverse to just increasing the number of segments.
+Instead of a decrease of 1/2, there is now an increase of 1/2 for survival rate.
+
+Here is the graph with a line with a rise of 1/2:
+
+![Graph for observation 5](observations/IncreasingPlayersAndSegmentsLine.PNG "Graph for observation 5")
+
+Here is the formula used to intersect the points:
+
+![Graph for observation 5](observations/IncreasingPlayersAndSegmentsEquation.PNG "Graph for observation 5")
+
+### Observation 6: Calculating the Chances of the First Player Winning
+
+Using the formula in oddsOfSurvival.py. The odds of the current player winning can be observed.
+The function's documentation can be found in oddsOfSurvival.py Overview.
+
+Observing from the first tile to the last tile, we can see the following:
+
+- 18: 0.00038%
+- 17: 0.00076%
+- 16: 0.00152%
+- 15: 0.00305%
+- 14: 0.06103%
+- 13: 0.01220%
+- 12: 0.02441%
+- 11: 0.04882%
+- 10: 0.09765%
+- 09: 0.19531%
+- 08: 0.39062%
+- 07: 0.78125%
+- 06: 1.5625%
+- 05: 3.125%
+- 04: 6.25%
+- 03: 12.5%
+- 02: 25%
+- 01: 50%
+
+Given these numbers, it is possible to graph them using a generalized formula based on the formula from oddsOfSurvival.py.
+
+This is a generalized formula that ignores decreasing the number of tiles left to guess.
+
+![Equation for observation 6](observations/ChancesOfTheFirstPlayerWinningEquation.PNG "Equation for observation 5")
+
+- The fraction indicates the number of panes minus the number of unsafe panes.
+- x indicates the amount of segments remaining.
+
+This is the graphical output for these values:
+
+![Graph for observation 6](observations/ChancesOfTheFirstPlayerWinning.PNG "Graph for observation 5")
+
+This is the same graph but with x representing the number of panes and y representing the number of players.
+
+![Graph with lines for observation 6](observations/ChancesOfTheFirstPlayerWinningWithLines.PNG "Graph with lines for observation 5")
+
+That intersection between the number of players correlates with increasing the total number of players for this specific grid.
+It is also around when the chances of one player actually winning start to become realistic.
+
+Using these and the concept of permutation, it may be possible to solve a bridge without having to simulate it.
+It may also be possible to do this project entirely without code.
+Using a computer, This could be graphed or have the values entered into a table.
+
+A interesting takeaway is that it is still more likely for someone to survive this bridge from start to finish than it is for someone to win the lottery.
+Someone is also much more likely to suffocate in bed accidentally.
+
+## References:
+
+### Special thank you to Dr. Gilbert and his discrete mathematics course.
+
+Much of the material learned here was in thanks to his course and his amazing book.
+
+His discrete mathematics book can be found [here.](https://agmath.github.io/DiscreteMathForComputing/output/html/dm4c.html)
+
+### Works Referenced During the Creation of This Project and Observation:
+
+[CNN - 5 Things More Likely to Happen Than You Winning the Lottery](https://www.cnn.com/2018/10/23/us/lottery-winning-odds-trnd/index.html)
+
+[Desmos Graphing Calculator](https://www.desmos.com/calculator)
+
+[Educba - Python Deepcopy](https://www.educba.com/python-deepcopy/)
+
+[Geeks For Geeks - 2D Arrays in Python](https://www.geeksforgeeks.org/python-using-2d-arrays-lists-the-right-way/)
+
+[Geeks For Geeks - Integer Count in Mixed List](https://www.geeksforgeeks.org/python-integer-count-in-mixed-list/)
+
+[Python.org - Random Library](https://docs.python.org/3/library/random.html)
+
+[TextKool - ASCII Generator](https://textkool.com/en/ascii-art-generator?hl=default&vl=default&font=Red%20Phoenix&text=Your%20text%20here%20ssadsad)
